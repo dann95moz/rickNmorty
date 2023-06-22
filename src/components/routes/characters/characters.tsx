@@ -26,7 +26,7 @@ const filtersArr=[
 const [filters, setfilters] = useState<optionFilters>()
       
 const handleChipClick =(data:any)=>{
-  const updatedFilters:any = Object.assign({}, filters);
+  const updatedFilters:any = Object.assign({}, filters);  
   setfilters(updatedFilters)
   for (const key in data) {
     if (!updatedFilters.hasOwnProperty(key) || updatedFilters[key] !== data[key]) {
@@ -35,7 +35,6 @@ const handleChipClick =(data:any)=>{
   }
 
   getFilteredCharacters(updatedFilters).then((response) => {
-    console.log(response);
     setcharacters(response.data);
   });
 
@@ -56,13 +55,14 @@ const handleChipClick =(data:any)=>{
         </Grid>
     </Grid>
 )
-const filtersTag =(element:string,array:string[])=>(
+const filtersTag =(element:string)=>(
     <Grid item key={element} >        
         <Chip 
+        clickable= {true}
         label={element}
-        
-        onClick={()=>{         
-              array === status ?
+      
+        onClick={()=>{                   
+              status.includes(element) ?
               handleChipClick({status: element})
               :
               handleChipClick({gender: element})
