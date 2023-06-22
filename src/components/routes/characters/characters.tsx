@@ -6,14 +6,11 @@ import {
   getFilteredCharacters,
 } from "../../../services/getCharacters.service";
 import { CharactersResults } from "../../../interfaces/Results/charactersResults.interface";
-import { FiltersComponent } from "../../filters/filters";
 import { CardComponent } from "../../cards/cards";
 import Grid from "@mui/material/Grid";
 import { optionFilters } from '../../../interfaces/optionFilters.interface';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
-import { filterCharacter } from "../../../interfaces/filterCharacters.interface";
-
 
 export function CharactersComponent() {
   

@@ -1,9 +1,0 @@
-.title{
-    font-size: 1.25rem;
-    font-weight: 500;
-}
-.filters-container{
-    display: flex;
-    flex-direction: column;
-    min-width: 12.5rem;
-}
