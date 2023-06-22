@@ -13,7 +13,6 @@ import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 
 export function CharactersComponent() {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [characters, setcharacters] = useState<Characters>({} as Characters);
 
 

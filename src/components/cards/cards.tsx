@@ -10,17 +10,17 @@ import { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, CardActionArea } from '@mui/material';
 export function CardComponent(cardInfo: cardInfo){
   const [showDialog, setShowDialog] = useState(false);
-  const [dialogData, setDialogData] = useState<cardInfo>()
+  
 
   const handleDialogOpen =()=>{
-    setDialogData(cardInfo)
+   
     console.log('click');
     setShowDialog(true);
     
   }
   const handleDialogClose =()=>{
     setShowDialog(false);
-    setDialogData({} as cardInfo);
+ 
   }
     return (
       <>
