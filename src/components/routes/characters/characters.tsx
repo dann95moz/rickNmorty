@@ -56,11 +56,12 @@ const handleChipClick =(data:any)=>{
     </Grid>
 )
 const filtersTag =(element:string)=>(
-    <Grid item key={element} >        
+    <Grid item key={element} 
+    >        
         <Chip 
         clickable= {true}
         label={element}
-      
+        variant="outlined"
         onClick={()=>{                   
               status.includes(element) ?
               handleChipClick({status: element})
@@ -72,24 +73,13 @@ const filtersTag =(element:string)=>(
          />
     </Grid>
 )
-
-
-
-    
-
   {
     useEffect(() => {
    
     getAllCharacters().then((response) => {
       setcharacters(response.data)
     })
-   
-      
     },[] );
-
-
- 
-
     const chars = (character: CharactersResults) => (
       <Grid key={character.id} item xs={12} md={6} lg={4} xl={3}>
         <CardComponent
