@@ -1,4 +1,7 @@
 export interface filterCharacter {
-    filters: string[];
-    value: string[];
+    name?:string;
+    status?: string;
+    species?:string;
+    type?:string;
+    gender?:string;
 }

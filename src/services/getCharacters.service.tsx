@@ -4,7 +4,15 @@ import { Characters } from '../interfaces/global/characters.interface';
 import { baseUrl } from './mainAPI';
 import { CharactersResults } from '../interfaces/Results/charactersResults.interface';
 
-
+function serializeObjectToQueryString(obj:any) {
+  const params = new URLSearchParams();
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      params.append(key, obj[key]);
+    }
+  }
+  return params.toString();
+}
 export const getCharacterById = (id: number) => {
     return axios.get<CharactersResults>(`${baseUrl}/character/${id}`);
   };
@@ -22,13 +30,11 @@ export const getCharacterById = (id: number) => {
   };
 
 export const getFilteredCharacters = (filterCharacter:filterCharacter)=>{
-    let filterUrl:string =''
-    for (let i = 0; i < filterCharacter.filters.length; i++) {
-      filterUrl+= `${filterCharacter.filters[i]}=${filterCharacter.value[i]}
-      ${(filterCharacter.filters.length>1 && i<filterCharacter.filters.length)? '&' : ''}`
-        
-    }
-    return axios.get<Characters>(`${baseUrl}/character/?${filterUrl}`);
+  const queryString = serializeObjectToQueryString(filterCharacter);
+console.log(queryString)
+console.log(`${baseUrl}/character/?${queryString}`);
+
+    return axios.get<Characters>(`${baseUrl}/character/?${queryString}`);
 }
 export const getCharacterByPage =(pageNumber:number)=>{
     return axios.get<Characters>(`${baseUrl}/character?page=${pageNumber}`)

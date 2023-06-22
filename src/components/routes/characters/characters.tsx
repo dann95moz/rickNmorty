@@ -9,15 +9,15 @@ import { CharactersResults } from "../../../interfaces/Results/charactersResults
 import { FiltersComponent } from "../../filters/filters";
 import { CardComponent } from "../../cards/cards";
 import Grid from "@mui/material/Grid";
-import { optionFilters } from "../../../interfaces/optionFilters.interface";
+import { optionFilters } from '../../../interfaces/optionFilters.interface';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
+import { filterCharacter } from "../../../interfaces/filterCharacters.interface";
 
 
 export function CharactersComponent() {
   
   const [characters, setcharacters] = useState<Characters>({} as Characters);
- const [filters, setfilters] = useState<Array<object>>([])
 
 
 const status =['alive','dead','unknown']
@@ -26,18 +26,22 @@ const filtersArr=[
     {status},
     {gender}
 ]
+const [filters, setfilters] = useState<optionFilters>()
       
-const handleChipClick =(data:optionFilters,index:number)=>{
-  
-  console.log(filters);
-  
-  const  updateArr = [...filters]
-  updateArr[index]=data
-  console.log(updateArr);
-  setfilters(updateArr)
-  
- 
-   
+const handleChipClick =(data:any)=>{
+  const updatedFilters:any = Object.assign({}, filters);
+  setfilters(updatedFilters)
+  for (const key in data) {
+    if (!updatedFilters.hasOwnProperty(key) || updatedFilters[key] !== data[key]) {
+      updatedFilters[key] = data[key];
+    }
+  }
+
+  getFilteredCharacters(updatedFilters).then((response) => {
+    console.log(response);
+    setcharacters(response.data);
+  });
+
  }
   const filtersContent = (element:any,index:number)=>(
     <Grid key={index}>
@@ -62,9 +66,9 @@ const filtersTag =(element:string,index:number,array:string[])=>(
         
         onClick={()=>{         
             {  array === status ?
-              handleChipClick({status: element},0)
+              handleChipClick({status: element})
               :
-              handleChipClick({gender: element},1)
+              handleChipClick({gender: element})
           }    
         }
          }           
@@ -78,22 +82,13 @@ const filtersTag =(element:string,index:number,array:string[])=>(
 
   {
     useEffect(() => {
-   if (filters.length===0) {
+   
     getAllCharacters().then((response) => {
       setcharacters(response.data)
     })
-   } else{
-    const find =filters.find((filter,index)=>Object.keys(filter))
-    console.log(find);
-    
-    //  getFilteredCharacters({ filters: filters.map((filter,index)=>Object.keys(filter[index])), value: [''] }).then(
-    //   (response) => {
-    //     setcharacters(response.data);
-       
-    //   })
-   }
+   
       
-    },[filters] );
+    },[] );
 
 
  
