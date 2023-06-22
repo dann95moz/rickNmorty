@@ -3,4 +3,5 @@ export interface cardInfo{
     location:string;
     specie:string;
     image:string;
+    
 }

@@ -13,7 +13,7 @@ import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 
 export function CharactersComponent() {
-  
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [characters, setcharacters] = useState<Characters>({} as Characters);
 
 
@@ -24,7 +24,7 @@ const filtersArr=[
     {gender}
 ]
 const [filters, setfilters] = useState<optionFilters>()
-      
+
 const handleChipClick =(data:any)=>{
   const updatedFilters:any = Object.assign({}, filters);  
   setfilters(updatedFilters)
@@ -82,13 +82,16 @@ const filtersTag =(element:string)=>(
     },[] );
     const chars = (character: CharactersResults) => (
       <Grid key={character.id} item xs={12} md={6} lg={4} xl={3}>
+
         <CardComponent
           key={character.id}
           name={character.name}
           location={character.origin.name}
           specie={character.species}
           image={character.image}
+         
         />
+      
       </Grid>
     );
 
