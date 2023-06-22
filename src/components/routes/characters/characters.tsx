@@ -56,17 +56,17 @@ const handleChipClick =(data:any)=>{
         </Grid>
     </Grid>
 )
-const filtersTag =(element:string,index:number,array:string[])=>(
+const filtersTag =(element:string,array:string[])=>(
     <Grid item key={element} >        
         <Chip 
         label={element}
         
         onClick={()=>{         
-            {  array === status ?
+              array === status ?
               handleChipClick({status: element})
               :
               handleChipClick({gender: element})
-          }    
+             
         }
          }           
          />
