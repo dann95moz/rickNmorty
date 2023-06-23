@@ -4,4 +4,5 @@ export interface filterCharacter {
     species?:string;
     type?:string;
     gender?:string;
+    page?:number;
 }

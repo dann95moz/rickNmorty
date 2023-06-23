@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import "./characters.css";
 import { Characters } from "../../../interfaces/global/characters.interface";
 import {
-  getAllCharacters,
-  getCharacterByPage,
+
   getFilteredCharacters,
 } from "../../../services/getCharacters.service";
 import { CharactersResults } from "../../../interfaces/Results/charactersResults.interface";
@@ -26,10 +25,11 @@ const filtersArr=[
 ]
 const [filters, setfilters] = useState<optionFilters>()
 const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-  setPage(value);
-  getCharacterByPage(value).then((response) => {
-    setcharacters(response.data)
-  })
+ console.log(characters);
+    setPage(value);
+    getFilteredCharacters({page:value}).then((response) => {
+      setcharacters(response.data)
+    })
 };
 
 const handleChipClick =(data:any)=>{
@@ -44,6 +44,7 @@ const handleChipClick =(data:any)=>{
 
   getFilteredCharacters(updatedFilters).then((response) => {
 
+    console.log(characters);
     
     setcharacters(response.data);
   });
@@ -87,7 +88,7 @@ const filtersTag =(element:string)=>(
   {
     useEffect(() => {
    
-    getAllCharacters().then((response) => {
+    getFilteredCharacters().then((response) => {
       setcharacters(response.data)
     })
     },[] );
@@ -113,6 +114,7 @@ const filtersTag =(element:string)=>(
     <Grid item md={12}><p className="title">Filter by category</p></Grid> 
     
     <Stack direction="row" spacing={1}>
+      
     <Grid item md={12}>
         {filtersArr.map(filtersContent)}
     </Grid>
@@ -122,13 +124,20 @@ const filtersTag =(element:string)=>(
           
           <Grid className="cards-container" container spacing={2} item xs={12} md={8} lg={8} xl={8} >
             <Grid item container md={12} justifyContent="center">
-               <Pagination 
-               count={10} 
+              {characters.info && <Pagination 
+               count={characters.info.pages} 
                shape="rounded" 
                page={page}
-               onChange={handleChange}/> 
+               onChange={handleChange}/> }
                </Grid>
             {characters.results && characters.results.map(chars)}
+            <Grid item container md={12} justifyContent="center">
+              {characters.info && <Pagination 
+               count={characters.info.pages} 
+               shape="rounded" 
+               page={page}
+               onChange={handleChange}/> }
+               </Grid>
           </Grid>
       
          </Grid>
