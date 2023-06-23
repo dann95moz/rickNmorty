@@ -31,9 +31,6 @@ export const getCharacterById = (id: number) => {
 
 export const getFilteredCharacters = (filterCharacter:filterCharacter)=>{
   const queryString = serializeObjectToQueryString(filterCharacter);
-console.log(queryString)
-console.log(`${baseUrl}/character/?${queryString}`);
-
     return axios.get<Characters>(`${baseUrl}/character/?${queryString}`);
 }
 export const getCharacterByPage =(pageNumber:number)=>{

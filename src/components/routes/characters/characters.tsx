@@ -3,6 +3,7 @@ import "./characters.css";
 import { Characters } from "../../../interfaces/global/characters.interface";
 import {
   getAllCharacters,
+  getCharacterByPage,
   getFilteredCharacters,
 } from "../../../services/getCharacters.service";
 import { CharactersResults } from "../../../interfaces/Results/charactersResults.interface";
@@ -11,10 +12,11 @@ import Grid from "@mui/material/Grid";
 import { optionFilters } from '../../../interfaces/optionFilters.interface';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
+import { Pagination } from "@mui/material";
 
 export function CharactersComponent() {
   const [characters, setcharacters] = useState<Characters>({} as Characters);
-
+const [page, setPage] = useState<number>(1)
 
 const status =['alive','dead','unknown']
 const gender=['female','male','genderless','unknown']
@@ -23,8 +25,15 @@ const filtersArr=[
     {gender}
 ]
 const [filters, setfilters] = useState<optionFilters>()
+const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  setPage(value);
+  getCharacterByPage(value).then((response) => {
+    setcharacters(response.data)
+  })
+};
 
 const handleChipClick =(data:any)=>{
+  setPage(1)
   const updatedFilters:any = Object.assign({}, filters);  
   setfilters(updatedFilters)
   for (const key in data) {
@@ -34,12 +43,15 @@ const handleChipClick =(data:any)=>{
   }
 
   getFilteredCharacters(updatedFilters).then((response) => {
+
+    
     setcharacters(response.data);
   });
 
  }
   const filtersContent = (element:any,index:number)=>(
     <Grid key={index}>
+
         <Grid item md={12}>
             <h4 >{Object.keys(element)}</h4> 
             <Grid container spacing={1}>
@@ -107,11 +119,19 @@ const filtersTag =(element:string)=>(
 </Stack>
     </Grid>
         </Grid>
+          
           <Grid className="cards-container" container spacing={2} item xs={12} md={8} lg={8} xl={8} >
+            <Grid item container md={12} justifyContent="center">
+               <Pagination 
+               count={10} 
+               shape="rounded" 
+               page={page}
+               onChange={handleChange}/> 
+               </Grid>
             {characters.results && characters.results.map(chars)}
           </Grid>
-        
-      </Grid>
+      
+         </Grid>
     );
   }
 }
