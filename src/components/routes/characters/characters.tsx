@@ -25,9 +25,9 @@ const filtersArr=[
 ]
 const [filters, setfilters] = useState<optionFilters>()
 const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
- console.log(characters);
+  const filterByPage = Object.assign({page:value}, filters); 
     setPage(value);
-    getFilteredCharacters({page:value}).then((response) => {
+    getFilteredCharacters(filterByPage).then((response) => {
       setcharacters(response.data)
     })
 };
@@ -43,9 +43,6 @@ const handleChipClick =(data:any)=>{
   }
 
   getFilteredCharacters(updatedFilters).then((response) => {
-
-    console.log(characters);
-    
     setcharacters(response.data);
   });
 
