@@ -4,7 +4,7 @@ import { Characters } from "../../../interfaces/global/characters.interface";
 import {
 
   getFilteredCharacters,
-} from "../../../services/getCharacters.service";
+} from "../../../services/apiCalls/getCharacters.service";
 import { CharactersResults } from "../../../interfaces/Results/charactersResults.interface";
 import { CardComponent } from "../../cards/cards";
 import Grid from "@mui/material/Grid";
