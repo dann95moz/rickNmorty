@@ -6,12 +6,12 @@ import {
   getFilteredCharacters,
 } from "../../../services/apiCalls/getCharacters.service";
 import { CharactersResults } from "../../../interfaces/Results/charactersResults.interface";
-import { CardComponent } from "../../cards/cards";
 import Grid from "@mui/material/Grid";
 import { optionFilters } from '../../../interfaces/optionFilters.interface';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import { Pagination } from "@mui/material";
+import { CharacterCard } from "../../cards/characterCards.component";
 
 export function CharactersComponent() {
   const [characters, setcharacters] = useState<Characters>({} as Characters);
@@ -92,7 +92,7 @@ const filtersTag =(element:string)=>(
     const chars = (character: CharactersResults) => (
       <Grid key={character.id} item xs={12} md={6} lg={4} xl={3}>
 
-        <CardComponent
+        <CharacterCard
           key={character.id}
           name={character.name}
           location={character.origin.name}

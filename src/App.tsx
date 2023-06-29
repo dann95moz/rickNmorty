@@ -2,9 +2,9 @@ import './App.css';
 import Navbar from './components/header/drawerAppBar';
 import { Routes,Route} from 'react-router-dom';
 import { HomeComponent } from './components/routes/home/home';
-import { CharactersComponent } from './components/routes/characters/characters';
-import { EpisodesComponent } from './components/routes/episodes/episodes';
-import { LocationsComponent } from './components/routes/locations/locations';
+import { CharactersComponent } from './components/routes/characters/characters.component';
+import { EpisodesComponent } from './components/routes/episodes/episodes.component';
+import { LocationsComponent } from './components/routes/locations/locations.component';
 
 
 function App() {

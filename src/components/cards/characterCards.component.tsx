@@ -3,12 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { cardInfo } from '../../interfaces/cardInfo.interface';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import {CardActionArea } from '@mui/material';
-export function CardComponent(cardInfo: cardInfo){
+import { characterCard } from '../../interfaces/cards/characterCard.interface';
+export function CharacterCard(cardInfo: characterCard){
   
 
  
