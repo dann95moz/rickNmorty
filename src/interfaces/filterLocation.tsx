@@ -1,8 +1,6 @@
 export interface filterLocation{
     name?:string;
-    status?: string;
-    species?:string;
+    dimension?:string;
     type?:string;
-    gender?:string;
-    page?:number;
+
 }
