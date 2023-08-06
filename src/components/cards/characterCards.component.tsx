@@ -24,13 +24,12 @@ export function CharacterCard(cardInfo: characterCard){
           />
           <CardContent>
           <Stack direction="row" spacing={1}>
-      <Chip label={cardInfo.location} size="small" />
       
     </Stack>
-            <Typography gutterBottom variant="h6" component="h6">
+            <Typography gutterBottom variant="h6" component="h6" sx={{whiteSpace: "nowrap", textOverflow:"ellipsis", overflow:"hidden"}}>
              {cardInfo.name}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" >
               {cardInfo.specie}
             </Typography>
           </CardContent>
