@@ -23,7 +23,6 @@ const filtersArr=[
     {status},
     {gender}
   ]
-  const [isOutline, setisOutline] = useState(true)
   const [filters, setfilters] = useState<optionFilters>()
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
@@ -36,7 +35,6 @@ const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
 };
 
   const handleChipClick = (data: any) => {
-  setisOutline(false)
   setPage(1)
   const updatedFilters:any = Object.assign({}, filters);  
   setfilters(updatedFilters)

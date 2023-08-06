@@ -14,11 +14,11 @@ export function CharacterCard(cardInfo: characterCard){
  
     return (
       <>
-        <Card sx={{ height:500 }} >
-        <CardActionArea sx={{height:'100%'}}>
+        <Card  >
+        <CardActionArea >
           <CardMedia
             component="img"
-            height="77%"
+            
             image={cardInfo.image}
             alt="card content"
           />
