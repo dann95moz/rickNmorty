@@ -12,6 +12,7 @@ import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import { Pagination } from "@mui/material";
 import { CharacterCard } from "../../cards/characterCards.component";
+import { Status } from "../../../interfaces/filters/filterCharacters.interface";
 
 export function CharactersComponent() {
   const [characters, setcharacters] = useState<Characters>({} as Characters);
@@ -34,13 +35,15 @@ const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     })
 };
 
-  const handleChipClick = (data: any) => {
+  const handleChipClick = (data: Status) => {
+    console.log(data);
+    
   setPage(1)
   const updatedFilters:any = Object.assign({}, filters);  
   setfilters(updatedFilters)
   for (const key in data) {
-    if (!updatedFilters.hasOwnProperty(key) || updatedFilters[key] !== data[key]) {
-      updatedFilters[key] = data[key];
+    if (!updatedFilters.hasOwnProperty(key) || updatedFilters[key as keyof Status] !== data[key as keyof Status]) {
+      updatedFilters[key] = data[key as keyof Status];
     }
   }
 
@@ -49,16 +52,19 @@ const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
   });
 
  }
- const filtersContent = (element: any, index: number) => (
+  const filtersContent = (element: Status, index: number) => (
+   
   <Grid key={index}>
     <Grid item md={12}>
       <h4>{Object.keys(element)}</h4>
-      <Grid container spacing={1}>
+        <Grid container spacing={1}>
+          {
+          }
         {element.status
           ? element.status.map((status: string) =>
               filtersTag(status, selectedButton)
             )
-          : element.gender.map((gender: string) =>
+          : element.gender?.map((gender: string) =>
               filtersTag(gender, selectedButton)
             )}
       </Grid>
@@ -73,9 +79,9 @@ const filtersTag = (element: string, selectedButton: string | null) => (
       variant={selectedButton === element ? "filled" : "outlined"}
       onClick={() => {
         if (status.includes(element)) {
-          handleChipClick({ status: element });
+          handleChipClick({ status: [element] });
         } else {
-          handleChipClick({ gender: element });
+          handleChipClick({ gender: [element] });
         }
         setSelectedButton(element); // Actualiza el botón seleccionado
       }}

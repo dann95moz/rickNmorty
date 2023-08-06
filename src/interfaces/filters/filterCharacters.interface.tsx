@@ -6,3 +6,7 @@ export interface filterCharacter {
     gender?:string;
     page?:number;
 }
+export interface Status {
+    status?: string[];
+    gender?:string[];
+}
