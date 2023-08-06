@@ -11,7 +11,7 @@ import { optionFilters } from '../../../interfaces/optionFilters.interface';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import { Pagination } from "@mui/material";
-import { CharacterCard } from "../../cards/characterCards.component";
+import { CharacterCard } from "../../cards/characterCard/characterCards.component";
 import { Status } from "../../../interfaces/filters/filterCharacters.interface";
 
 export function CharactersComponent() {
@@ -104,6 +104,8 @@ const filtersTag = (element: string, selectedButton: string | null) => (
           location={character.origin.name}
           specie={character.species}
           image={character.image}
+          status={character.status}
+          gender={character.gender}
          
         />
       

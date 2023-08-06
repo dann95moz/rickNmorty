@@ -7,7 +7,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import {CardActionArea } from '@mui/material';
-import { characterCard } from '../../interfaces/cards/characterCard.interface';
+import { characterCard } from '../../../interfaces/cards/characterCard.interface';
 export function CharacterCard(cardInfo: characterCard){
   
 
