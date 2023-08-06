@@ -22,8 +22,11 @@ const gender=['female','male','genderless','unknown']
 const filtersArr=[
     {status},
     {gender}
-]
-const [filters, setfilters] = useState<optionFilters>()
+  ]
+  const [isOutline, setisOutline] = useState(true)
+  const [filters, setfilters] = useState<optionFilters>()
+  const [selectedButton, setSelectedButton] = useState<string | null>(null);
+
 const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
   const filterByPage = Object.assign({page:value}, filters); 
     setPage(value);
@@ -32,7 +35,8 @@ const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     })
 };
 
-const handleChipClick =(data:any)=>{
+  const handleChipClick = (data: any) => {
+  setisOutline(false)
   setPage(1)
   const updatedFilters:any = Object.assign({}, filters);  
   setfilters(updatedFilters)
@@ -47,41 +51,39 @@ const handleChipClick =(data:any)=>{
   });
 
  }
-  const filtersContent = (element:any,index:number)=>(
-    <Grid key={index}>
-
-        <Grid item md={12}>
-            <h4 >{Object.keys(element)}</h4> 
-            <Grid container spacing={1}>
-                {
-                element.status?
-                 element.status.map(filtersTag) 
-                 :
-                  element.gender.map(filtersTag)
-                  }
-      
-            </Grid>
-        </Grid>
+ const filtersContent = (element: any, index: number) => (
+  <Grid key={index}>
+    <Grid item md={12}>
+      <h4>{Object.keys(element)}</h4>
+      <Grid container spacing={1}>
+        {element.status
+          ? element.status.map((status: string) =>
+              filtersTag(status, selectedButton)
+            )
+          : element.gender.map((gender: string) =>
+              filtersTag(gender, selectedButton)
+            )}
+      </Grid>
     </Grid>
-)
-const filtersTag =(element:string)=>(
-    <Grid item key={element} 
-    >        
-        <Chip 
-        clickable= {true}
-        label={element}
-        variant="outlined"
-        onClick={()=>{                   
-              status.includes(element) ?
-              handleChipClick({status: element})
-              :
-              handleChipClick({gender: element})
-             
+  </Grid>
+);
+const filtersTag = (element: string, selectedButton: string | null) => (
+  <Grid item key={element}>
+    <Chip
+      clickable={true}
+      label={element}
+      variant={selectedButton === element ? "filled" : "outlined"}
+      onClick={() => {
+        if (status.includes(element)) {
+          handleChipClick({ status: element });
+        } else {
+          handleChipClick({ gender: element });
         }
-         }           
-         />
-    </Grid>
-)
+        setSelectedButton(element); // Actualiza el botón seleccionado
+      }}
+    />
+  </Grid>
+);
   {
     useEffect(() => {
    
