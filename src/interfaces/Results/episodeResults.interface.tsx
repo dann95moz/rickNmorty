@@ -5,5 +5,5 @@ export interface EpisodeResults {
     episode:    string;
     characters: string[];
     url:        string;
-    created:    Date;
+    created:    string;
 }
